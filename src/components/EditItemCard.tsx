@@ -199,7 +199,7 @@ export default function EditItemCard({
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="flex-1 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? (isEditMode ? 'Updating...' : 'Creating...') : 'Submit'}
           </button>

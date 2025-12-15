@@ -60,8 +60,8 @@ export default function EditLocationColumn({
   };
 
   return (
-    <div className="flex flex-col min-w-[300px] max-w-[350px] bg-green-50 dark:bg-green-900/20 rounded-lg p-4 shadow-lg border-2 border-green-300 dark:border-green-700">
-      <div className="mb-4 pb-3 border-b-2 border-green-300 dark:border-green-700">
+    <div className="flex flex-col min-w-[300px] max-w-[350px] h-full bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 shadow-lg border-2 border-blue-300 dark:border-blue-700">
+      <div className="mb-4 pb-3 border-b-2 border-blue-300 dark:border-blue-700">
         <h2 className="text-xl font-bold text-black dark:text-white">
           {isEditMode ? 'Edit Location' : 'Add New Location'}
         </h2>
@@ -95,7 +95,7 @@ export default function EditLocationColumn({
           <button
             onClick={handleSubmit}
             disabled={loading}
-            className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md font-medium disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? (isEditMode ? 'Updating...' : 'Creating...') : 'Submit'}
           </button>
