@@ -50,7 +50,7 @@ export default function LocationColumn({
           className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-md text-sm font-medium transition-colors" 
           onClick={handleAddItem}
         >
-          + Add
+          +
         </button>
       </div>
       
