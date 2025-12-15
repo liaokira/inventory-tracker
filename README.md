@@ -1,110 +1,78 @@
-# Inventory Tracker - Serverless API Framework
+# Inventory Tracker
 
-This is a [Next.js](https://nextjs.org) project with Vercel serverless API functions.
+View it deployed here: https://inventory-tracker-o01i0vw5m-kira-liaos-projects.vercel.app/
 
-## Getting Started
+## System Overview
 
-First, install dependencies:
+### Tech Stack
 
-```bash
-npm install
-```
+- **Frontend Framework**: Next.js 16 (App Router) with React 19
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS 4
+- **Database**: Neon PostgreSQL (Serverless)
+- **API**: Next.js API Routes (Serverless Functions)
+- **Deployment**: Vercel
 
-Then, run the development server:
+### Architecture
 
+The application uses a serverless architecture with the following components:
+
+- **Frontend**: React components with client-side state management
+- **API Layer**: RESTful API endpoints using Next.js Route Handlers
+- **Database**: PostgreSQL database hosted on Neon with automatic connection pooling
+- **Deployment**: Serverless functions on Vercel for automatic scaling
+
+### Reasoning & Tradeoffs
+- The characteristics of this project are:
+    - Small scale (not used by a lot of people worldwide)
+    - Simple data type / responses
+- **React frontend** -> Modern standard, easy to create responsive apps as a SPA
+    - Easy to fetch data and have the page "react" accordingly to user input
+    - Also easy to deploy to Vercel
+- **Neon DB** -> Neon is ideal for: Low traffic apps, side projects
+    - 2 standard types of data (locations and items)
+    - Neon DB works well with serverless functions
+- **Vercel Serverless API**
+    - I rule out using serverful API since we don't need to have 24/7 uptime, or a heavy load of requests
+    - Presumably only a small amount of people will be using this so no need to worry about exceeding Vercel free limits
+    - Also it's easier and quicker to deploy serverless for a small project
+
+TLDR: prioritizing fast deployment, ease of access, no need for scalability/complexity. With this in mind, potential tradeoffs may be:
+- Can't handle a consistent heavy load of users
+- Would be costly to scale
+- Might not handle other unstructured data well
+
+### Running Locally
+
+- Node.js 18+ installed
+- A Neon database account (free tier available at [neon.tech](https://neon.tech))
+
+### Running Locally
+
+1. Start the development server:
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the API testing interface.
-
-## Serverless API Structure
-
-### Creating API Endpoints
-
-API routes are created in the `src/app/api/` directory. Each route is defined by a `route.ts` file.
-
-**Example structure:**
+2. Open your browser and navigate to:
 ```
-src/app/api/
-  └── example/
-      └── route.ts
+http://localhost:3000
 ```
 
-This creates an endpoint at `/api/example`.
+3. The application will connect to your database and you can start adding locations and items!
 
-### Example API Route
-
-```typescript
-import { NextRequest, NextResponse } from 'next/server';
-
-export async function GET(request: NextRequest) {
-  return NextResponse.json({ message: 'Hello World' });
-}
-
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  return NextResponse.json({ received: body });
-}
-```
-
-### Supported HTTP Methods
-
-- `GET` - Retrieve data
-- `POST` - Create/send data
-- `PUT` - Update data
-- `DELETE` - Delete data
-- `PATCH` - Partial update
-
-### Configuration
-
-The `vercel.json` file contains serverless function configuration:
-
-```json
-{
-  "functions": {
-    "src/app/api/**/*.ts": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  }
-}
-```
-
-- **memory**: Memory allocated to each function (MB)
-- **maxDuration**: Maximum execution time (seconds)
-
-## Testing the API
-
-Visit [http://localhost:3000](http://localhost:3000) to access the API testing interface which includes:
-
-- **GET Request Test**: Tests `/api/example?name=Developer`
-- **POST Request Test**: Tests `/api/example` with JSON body
-
-You can also test using curl:
+### Building for Production
 
 ```bash
-# GET request
-curl http://localhost:3000/api/example?name=YourName
-
-# POST request
-curl -X POST http://localhost:3000/api/example \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test User","email":"test@example.com"}'
+npm run build
+npm start
 ```
 
-## Deploy on Vercel
+## Usage Tips
 
-Deploy your app to Vercel:
+- **Add Location**: Click the "+" button on the right side of the screen
+- **Add Item**: Click the "+" button inside any location column
+- **Edit Item**: Click on any item card to edit it in place
+- **Edit Location**: Click on the location name to rename it
+- **Search**: Use the search bar at the top to filter by category, location, or item name
 
-1. Push your code to GitHub
-2. Import your repository on [Vercel](https://vercel.com/new)
-3. Vercel will automatically detect Next.js and configure serverless functions
-
-Your API endpoints will be available at: `https://your-app.vercel.app/api/...`
-
-## Learn More
-
-- [Next.js API Routes Documentation](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
-- [Vercel Serverless Functions](https://vercel.com/docs/functions/serverless-functions)
-- [Next.js Documentation](https://nextjs.org/docs)
