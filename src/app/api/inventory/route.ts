@@ -18,8 +18,11 @@ export async function GET(request: NextRequest) {
         COALESCE(
           json_agg(
             json_build_object(
+              'id', i.id,
               'name', i.name,
-              'category', i.category
+              'category', i.category,
+              'quantity', i.quantity,
+              'notes', i.notes
             )
           ) FILTER (WHERE i.id IS NOT NULL),
           '[]'
@@ -27,7 +30,6 @@ export async function GET(request: NextRequest) {
       FROM locations l
       LEFT JOIN items i ON l.id = i.location_id
       GROUP BY l.id, l.name
-      ORDER BY l.name
     `;
 
     return NextResponse.json(
